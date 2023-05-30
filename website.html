@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Website</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <style>
+
+    /* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh7USSwiPGQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin */
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/ptserif/v18/EJRSQgYoZZY2vCFuvAnt66qSVys.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* 全局樣式 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+#top-section{
+    background: #272626;
+    padding: 15px 0px;
+    font-weight: 300;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: 0px;
+
+}
+nav a{
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    font-style: normal;
+    color: #000000;
+    text-decoration: none;
+    border-color: transparent;
+    padding: 15px 0;
+    border-bottom: 3px solid;
+    border-bottom-color: #fff;
+    
+}
+nav a:first-child {
+    border-bottom-color: rgb(255, 153, 51);
+}
+nav a:hover{
+    border-bottom-color: rgb(255, 153, 51);
+}
+
+nav {
+    margin: 0 200px;
+}
+
+nav a:not(:first-child) {
+    margin-left: 51px;
+}
+.contact-info{
+    /*margin-left: 100px;*/
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.navigation{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+ 
+}
+
+.logoa{
+ text-decoration: none
+}
+.logotext{
+    font-weight: 700;
+    font-style: normal;
+    font-family: 'PT Serif', serif;
+    color: #535353;
+    font-size: 50px;
+    line-height: 1;
+    letter-spacing: 0px;
+    margin-left: 20px;
+}
+
+/* 底部區塊 */
+#second-section {
+    max-width: 1200px;
+    margin:auto;
+    display: flex;
+}
+#bottom-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+}
+.bottom-section :hover {
+ background-color: rgba(100, 100, 100, 50);
+}
+
+.columnall{
+    background-image: url("asset4.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 90px 30px;
+}
+
+
+.column {
+  flex-basis: 30%;
+}
+.column50 {
+    flex-basis: 50%;
+}
+.first-image {
+    background-image: url("asset5.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.first-image h2 {
+    margin: 320px 70px 57px 70px;
+    text-align: center;
+    color: white;
+}
+.second-image {
+    background-image: url("asset6.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.second-image h2 {
+    margin: 320px 70px 57px 70px;
+    text-align: center;
+    color: white;
+}
+.third-image {
+    background-image: url("asset7.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.third-image h2{
+    margin: 320px 70px 57px 70px;
+    text-align: center;
+    color: white;
+}
+.centerhead {
+    text-align: center;
+    font-weight: 700;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    color: #535353;
+    font-size: 50px;
+    line-height: 1.2;
+    letter-spacing: 0px;
+    margin-bottom: 0;
+}
+
+.center{
+    text-align: center;
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    color: #7abee9;
+    font-size: 30px;
+    line-height: 1.5;
+    letter-spacing: 0px;
+    margin-top: 0;
+}
+.mainh1{
+    font-weight: 700;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    color: #535353;
+    font-size: 50px;
+    line-height: 1.2;
+    letter-spacing: 0px;
+    margin-bottom: 0;
+    padding-left: 100px;
+}
+.mainp1{
+    font-weight: 700;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    color: #7abee9;
+    font-size: 80px;
+    line-height: 1.1;
+    letter-spacing: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 100px;
+}
+.mainp2{
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    color: #535353;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: 0px;
+    margin-top: 0;
+    padding-left: 100px;
+}
+.secondh1{
+    font-weight: 700;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    color: #535353;
+    font-size: 50px;
+    line-height: 1.2;
+    letter-spacing: 0px;
+    margin-bottom: 0;
+    margin-top: 150px;
+}
+.secondp1{
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    color: #7abee9;
+    font-size: 30px;
+    line-height: 1.5;
+    letter-spacing: 0px;
+        margin-bottom: 0;
+    
+}
+.secondp2{
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
+    color: #8d8d8d;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0px;
+    margin-top: 0;
+   
+}
+
+/* 共用樣式 */
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.h2:hover{
+    color: #ff9933;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.btn{
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #ff9933;
+    background-color: transparent;
+    border-color: #ff9933;
+    border-width: 1px;
+    font-size: 12px;
+    padding: 13px 30px;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    transition: .3s;
+    line-height: 20px;
+    border: 2px solid;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    text-decoration: none;
+    border-radius: 1px
+}
+.btn:hover{
+    color: #fff;
+    border-color: #7abee9;
+    background-color: #7abee9
+    
+}
+
+.btn1 {
+    display: inline-block;
+    background-color: #ff9933;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 20px 54px;
+    margin-top: 20px;
+    margin-left: 100px;
+    transition: .3s;
+    border-radius: 3px
+}
+.btn1:hover {
+    color: #fff;
+    background-color: black
+    
+}
+
+.btn2 {
+    display: inline-block;
+    background-color: #ff9933;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 20px 54px;
+    margin-top: 20px;
+    transition: .3s;
+    border-radius: 3px
+}
+.btn2:hover {
+    color: #fff;
+    background-color: black
+}
+.socialmediaicon{
+    background-color: white;
+    border-radius: 45px;
+    color: #000000;
+    font-size: 5px;
+    padding: 3px;
+}
+
+  </style>
+</head>
+<body>
+
+    
+
+  <header id="top-section">
+    <a href="asset2.svg"></a>
+    <div class="contact-info">
+        <div>
+            <i class="fa fa-solid fa-phone" style="color: #ff9933;"></i>Toll-free:(123)456-7890
+        </div>
+        <div>
+            <i class="fa fa-brands fa-twitter socialmediaicon"></i>
+            <i class="fa fa-brands fa-facebook socialmediaicon"></i>
+            <i class="fa fa-brands fa-pinterest socialmediaicon"></i>
+            <i class="fa fa-brands fa-linkedin socialmediaicon"></i>
+        </div>
+    </div>
+  </header>
+<div class="navigation">
+  <a class="logoa" href="#"><img src="asset0.png" alt="網站名稱" style="transform: translateY(10px);">
+    <h1 class="logotext" style="display: inline-block;"> Anilove </h1>
+        </a> 
+        <nav>
+            <a href="">Home</a>
+            <a href="">About</a>
+            <a href="">Event</a>
+            <a href="">News</a>
+            <a href="">Contains</a>
+        </nav>
+        <a href="#" class="btn">DONATE NOW!</a>
+    </div>
+  
+  <section id="main-section">
+    <div class="columnall">
+      <h1 class="mainh1"> Animals Need</h1>
+      <p class="mainp1">Your Help!</p>
+      <p class="mainp2">You can chip in with money & effort!</p>
+      <a href="#" class="btn1">DONATE NOW!</a>
+    </div>
+  </section>
+
+  <section id="second-section">
+    <div class="column50">
+      <a href="#"><img style="width: 550px;" src="asset1.jpeg" alt="dog"></a>
+    </div>
+    <div class="column50">
+      <h1 class="secondh1"> About Us </h1>
+      <p class="secondp1">What Makes Us Care About Pets?</p>
+      <p class="secondp2">If it wasn’t for our founder’s childhood spent on a ranch in northern Texas, surrounded by domestic animals and pets all the time till she went to college – there might have been no Anilove animal shelter now. So as soon as she graduated with her Veterinary degree 12 years ago, she already knew what she will be doing for a living.
+      </p>
+      <p class="secondp2"></p>
+      <p class="secondp2">All in all, with thousands of animals saved off the streets and cared for every year, we hope to encourage much more pet adoptions to happen!</p>
+      <a href="#" class="btn2">LEARN MORE</a>
+    </div>
+  </section>
+
+<div style="background-color:#f9f9f9;">
+  <h1 class="centerhead"> How You Can Help </h1>
+      <p class="center">There Are Countless Ways You Can Join In & Help Us!</p>
+
+  <section id="bottom-section">
+    <div class="column first-image">
+      <h2>Volunteer</h2>
+    </div>
+    <div class="column second-image">
+      <h2>Adopt</h2>
+    </div>
+    <div class="column third-image">
+      <h2>Sponsor</h2>
+    </div>
+  </section>
+</div>
