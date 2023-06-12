@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜數字遊戲</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #FCE5E6; 
+            background-image: linear-gradient(#FCE5E6, #FFC3C6); 
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-family: 'Comic Sans MS', cursive;
+            color: #FFA3C4; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #game-container {
+            border-radius: 5px;
+            width: 300px;
+            margin: 0 auto;
+            border: 1px solid #FFA3C4; 
+            border-radius: 5px; 
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+
+        #output { 
+            margin-bottom: 10px;
+            border: 1px solid #FFA3C4; 
+            background-color: #FFD9E5; 
+            padding: 10px;
+            height: 40px;
+            border-radius: 10px; 
+            font-family: 'Comic Sans MS', cursive; 
+            color: #FF0066; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+        }
+        #outputRange {
+            color: #FF0066; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+            margin-bottom: 10px;
+        }
+
+        #input {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #guess-input {
+            background-color: #FFD9E5; 
+            border: 1px solid #FFA3C4; 
+            border-radius: 10px; 
+            padding: 5px;
+            width: 100px;
+            text-align: center;
+        }
+
+        #guessBtn {
+            margin-left: 10px;
+            background-color: #FFD9E5; 
+            border: 1px solid #FFA3C4; 
+            border-radius: 10px; 
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s; 
+        }
+
+        #guessBtn:hover {
+            background-color: #FFA3C4; 
+        }
+
+        #keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+        }
+
+        .key {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #FFD9E5; 
+            border: 1px solid #FFA3C4; 
+            border-radius: 10px; 
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s; 
+        }
+
+        .key:hover {
+            background-color: #FFA3C4; 
+        }
+
+        #clear-btn {
+            background-color: #FFD9E5; 
+            border: 1px solid #FFA3C4; 
+            border-radius: 10px; 
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s; 
+        }
+
+        #clear-btn:hover {
+            background-color: #FFA3C4; 
+        }
+
+        #reset-btn{
+            background-color: #FFD9E5; 
+            border: 1px solid #FFA3C4; 
+            border-radius: 10px; 
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s; 
+        }
+        #reset-btn:hover {
+           background-color: #FFA3C4;
+        }
+
+       
+    </style>
+</head>
+<body>
+  
+  
+ 
+
+  <h1>猜數字遊戲</h1>
+  <div id="game-container">
+      <div id="outputRange"></div>
+      <div id="output"></div>
+      <div id="input">
+          <input type="text" id="guess-input" placeholder="輸入數字" />
+          <button id="guessBtn">猜！</button>
+      </div>
+      <div id="keypad">
+          <div class="key">1</div>
+          <div class="key">2</div>
+          <div class="key">3</div>
+          <div class="key">4</div>
+          <div class="key">5</div>
+          <div class="key">6</div>
+          <div class="key">7</div>
+          <div class="key">8</div>
+          <div class="key">9</div>
+          <div class="key">0</div>
+          <div id="clear-btn">清除</div>
+          <div id="reset-btn">重來</div>
+      </div>
+  </div>
+
+  <script>
+      
+      document.addEventListener('DOMContentLoaded', function() {
+          let minRange = 1;
+          let maxRange = 100;
+          const targetNumber = generateRandomNumber(minRange, maxRange);
+          console.log(targetNumber);
+          let attempts = 0;
+
+          const output = document.getElementById('output');
+          const guessInput = document.getElementById('guess-input');
+          const guessBtn = document.getElementById('guessBtn');
+          const keypad = document.getElementById('keypad');
+          const clearBtn = document.getElementById('clear-btn');
+          const resetBtn = document.getElementById('reset-btn');
+
+          guessBtn.addEventListener('click', handleGuess);
+          clearBtn.addEventListener('click', clearGuessInput);
+          keypad.addEventListener('click', handleKeypadClick);
+          resetBtn.addEventListener('click', resetGame);
+
+
+      
+
+          
+
+          function handleGuess() {
+              const guess = Number(guessInput.value);
+              if (!isNaN(guess)) {
+                  attempts++;
+                  if (guess === targetNumber) {
+                      showCongratsModal();
+                      updateGuessRange(); 
+                      clearGuessInput(); 
+                      return; 
+                  } else if (guess < targetNumber) {
+                      output.textContent = `第 ${attempts} 次猜測：${guess}，太小了！`;
+                      minRange = Math.max(minRange, guess + 1);
+                  } else {
+                      output.textContent = `第 ${attempts} 次猜測：${guess}，太大了！`;
+                      maxRange = Math.min(maxRange, guess - 1);
+                  }
+                  updateGuessRange(); 
+                  clearGuessInput();
+              }
+          }
+
+          function updateGuessRange() {
+            outputRange.textContent = `範圍：${minRange} - ${maxRange}`;
+          }
+
+          function clearGuessInput() {
+              guessInput.value = '';
+          }
+
+          function handleKeypadClick(event) {
+              const key = event.target.textContent;
+              if (key >= '0' && key <= '9') {
+                  guessInput.value += key;
+              }
+          }
+
+          function generateRandomNumber(min, max) {
+              return Math.floor(Math.random() * (max - min + 1)) + min;
+          }
+
+          function showCongratsModal() {
+            //   congratsModal.style.display = 'flex';
+            alert('猜對了')
+          }
+
+          function resetGame() {
+           // 重置遊戲相關變數和狀態
+            minRange = 1;
+            maxRange = 100;
+            attempts = 0;
+            targetNumber = generateRandomNumber(minRange, maxRange);
+
+            // 清空猜測輸入框和結果輸出
+            clearGuessInput();
+            output.textContent = '';
+
+            // 更新範圍顯示
+            updateGuessRange();
+
+            // 隱藏恭喜視窗（如果需要的話）
+            congratsModal.style.display = 'none';
+          }
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>猜數字遊戲</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background-color: #FCE5E6; /* 可愛的粉色 */
+      background-image: linear-gradient(#FCE5E6, #FFC3C6); /* 背景漸變 */
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-family: 'Comic Sans MS', cursive; /* 漫畫字體 */
+      color: #FFA3C4; /* 淡粉色 */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 文字陰影 */
+    }
+
+    #game-container {
+      border-radius: 5px;
+      width: 300px;
+      margin: 0 auto;
+      border: 1px solid #FFA3C4; /* 淡粉色邊框 */
+      border-radius: 5px; /* 圓角邊框 */
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 陰影效果 */
+    }
+
+    #output {
+      margin-bottom: 10px;
+      border: 1px solid #FFA3C4; /* 淡粉色邊框 */
+      background-color: #FFD9E5; /* 可愛的淡粉色背景 */
+      padding: 10px;
+      height: 40px;
+      border-radius: 10px; /* 圓角邊框 */
+      font-family: 'Comic Sans MS', cursive; /* 漫畫字體 */
+      color: #FF0066; /* 深粉紅色文字 */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 文字陰影 */
+    }
+
+    #input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    #guess-input {
+      background-color: #FFD9E5; /* 可愛的淡粉色 */
+      border: 1px solid #FFA3C4; /* 淡粉色邊框 */
+      border-radius: 10px; /* 圓角邊框 */
+      padding: 5px;
+      width: 100px;
+      text-align: center;
+    }
+
+    .guess-btn {
+      background-color: #FFD9E5; /* 可愛的淡粉色 */
+      border: 1px solid #FFA3C4; /* 淡粉色邊框 */
+      border-radius: 10px; /* 圓角邊框 */
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .guess-btn:hover {
+      background-color: #FFC3C6; /* 淡粉色按鈕特效 */
+    }
+
+    #clearBtn {
+      background-color: #FFD9E5; /* 可愛的淡粉色 */
+      border: 1px solid #FFA3C4; /* 淡粉色邊框 */
+      border-radius: 10px; /* 圓角邊框 */
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #clearBtn:hover {
+      background-color: #FFC3C6; /* 淡粉色按鈕特效 */
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #FF0066; /* 深粉紅色文字 */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 文字陰影 */
+    }
+
+    .congrats-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+      z-index: 9999;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.3s;
+    }
+
+    .congrats-popup.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .congrats-content {
+      background-color: #FFF;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .congrats-message {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #FF0066; /* 深粉紅色文字 */
+    }
+
+    .close-btn {
+      background-color: #FFD9E5; /* 可愛的淡粉色 */
+      border: 1px solid #FFA3C4; /* 淡粉色邊框 */
+      border-radius: 10px; /* 圓角邊框 */
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .close-btn:hover {
+      background-color: #FFC3C6; /* 淡粉色按鈕特效 */
+    }
+
+    .number-btn {
+      background-color: #FFD9E5; /* 可愛的淡粉色 */
+      border: 1px solid #FFA3C4; /* 淡粉色邊框 */
+      border-radius: 10px; /* 圓角邊框 */
+      padding: 5px 10px;
+      margin: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .number-btn:hover {
+      background-color: #FFC3C6; /* 淡粉色按鈕特效 */
+    }
+  </style>
+</head>
+
+<body>
+  <h1>文青猜數字遊戲</h1>
+  <div id="game-container">
+    <div id="output"></div>
+    <div id="input">
+      <input type="text" id="guess-input" placeholder="請輸入數字" readonly>
+      <div id="number-keyboard">
+        <button class="number-btn">1</button>
+        <button class="number-btn">2</button>
+        <button class="number-btn">3</button>
+        <button class="number-btn">4</button>
+        <button class="number-btn">5</button>
+        <button class="number-btn">6</button>
+        <button class="number-btn">7</button>
+        <button class="number-btn">8</button>
+        <button class="number-btn">9</button>
+        <button class="number-btn">0</button>
+      </div>
+      <button class="guess-btn" id="guessBtn">猜！</button>
+      <button class="guess-btn" id="clearBtn">清除</button>
+    </div>
+    <div id="message"></div>
+  </div>
+  <div class="congrats-popup" id="congratsPopup">
+    <div class="congrats-content">
+      <div class="congrats-message">恭喜答對了！</div>
+      <button class="close-btn" id="closeBtn">關閉</button>
+    </div>
+  </div>
+
+  <script>
+    // 產生一個1到100的隨機數字
+    const targetNumber = Math.floor(Math.random() * 100) + 1;
+    let minRange = 1;
+    let maxRange = 100;
+
+    const output = document.getElementById('output');
+    const guessInput = document.getElementById('guess-input');
+    const guessBtn = document.getElementById('guessBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const message = document.getElementById('message');
+    const congratsPopup = document.getElementById('congratsPopup');
+    const closeBtn = document.getElementById('closeBtn');
+
+    guessBtn.addEventListener('click', checkGuess);
+    clearBtn.addEventListener('click', clearInput);
+    closeBtn.addEventListener('click', closeCongratsPopup);
+
+    const numberButtons = document.querySelectorAll('.number-btn');
+    numberButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        guessInput.value += button.textContent;
+      });
+    });
+
+    function checkGuess() {
+      const guess = parseInt(guessInput.value);
+
+      if (isNaN(guess)) {
+        message.textContent = '請輸入有效數字！';
+      } else if (guess < minRange || guess > maxRange) {
+        message.textContent = `請猜${minRange}到${maxRange}之間的數字！`;
+      } else if (guess === targetNumber) {
+        showCongratsPopup();
+      } else if (guess < targetNumber) {
+        minRange = guess + 1;
+        message.textContent = `再高一點！猜數字範圍：${minRange} 到 ${maxRange}`;
+      } else {
+        maxRange = guess - 1;
+        message.textContent = `再低一點！猜數字範圍：${minRange} 到 ${maxRange}`;
+      }
+
+      clearInput();
+    }
+
+    function clearInput() {
+      guessInput.value = '';
+    }
+
+    function showCongratsPopup() {
+      congratsPopup.classList.add('show');
+    }
+
+    function closeCongratsPopup() {
+      congratsPopup.classList.remove('show');
+    }
+  </script>
+</body>
+
+</html>

@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Noto+Sans+TC:wght@300;500&display=swap');
+
+        body{
+            font-family: 'Noto Sans TC', sans-serif;
+            background-image: url(img/bg.png);
+            /* background-color: #fefefe; */
+        }
         .color{
             height: 300px;
             width: 439px;
@@ -98,15 +105,36 @@
             transform: translateX(-300px)
             
         }
+        .article h3 span{
+            color: #bb0404;
+            font-weight: 600;
+            font-size: 20px;
+            flex-grow: 0;
+        }
+
         h3{
             color: rgb(173, 8, 8);
+           
         }
-        h4{
-            background-color: black;
-            color: white;
+
+        .article h3::after{
+            content: '';
             display: inline-block;
-            border-radius: 5px;
-            margin: 0px 0px;
+            width: 50px;
+            height: 2px;
+            font-size: 20px;
+            background-color: #bb0404;
+            margin-left: 10px;
+            flex-grow: 1;
+        }
+
+        h4{
+            background-color: #000;
+        color: #fff;
+        font-weight: 100;
+        width: fit-content;
+        padding: 5px 10px;
+        border-radius: 3px;
         }
         ul {
             list-style: none; /* Remove default bullets */
@@ -138,7 +166,7 @@
 </head>
 <body>
     <div>
-    <div class="info01">
+    <section class="info01">
         <div class="color"></div>
         <img class="img01" src="./pic/car.png">
         <div class="left">
@@ -150,16 +178,16 @@
         </div>
         <img src="./pic/btn.png" class="btn"></img>
         <div class="article">
-            <h3>因為我們做了這些革新 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯</h3>
+            <h3><span>因為我們做了這些革新</span></h3>
             <h4>低重心設計</h4>
             <ul><li>透過低重心設計,不僅呈現更低伏的外觀,更能減少車身側傾,保持高速行駛穩定性。</li></ul>
-            <h4>車體剛性強化|</h4>
+            <h4>車體剛性強化</h4>
             <ul><li>車身結構採用超高強度鋼材,提高車輛穩定性,同時藉由雷射強化焊接技術,大幅增加焊點數量,提升車身抗扭剛性,強化駕馭穩定性及安全性。</ul>
             <h4>四輪獨立懸吊</h4>
             <ul><li>搭載全新四輪獨立懸吊設定,透過懸吊的高承載強度,保持輪胎抓地力,同時兼顧轉向 靈敏度與清晰路感回饋,提升駕馭樂趣。</li></ul>
             
         </div>
-    </div>
+    </section>
     <div>
         <div class="info02">
             <div class="color"></div>
