@@ -77,7 +77,7 @@
 
                 return
             }
-
+        // 看有沒有猜對
             if(guessNum < minNum || guessNum > maxNum) {
                 showHint()
                 guessInput.value = ''
@@ -93,11 +93,14 @@
                 return
             } else if (guessNum < answerNum) {
                 minNum = guessNum
-                showHint()
+                // showHint()
             }else if (guessNum > answerNum) {
                 maxNum = guessNum
-                showHint()
+                // showHint()
             }
+
+            guessInput.value = ''
+            showHint()
 
         }
 
