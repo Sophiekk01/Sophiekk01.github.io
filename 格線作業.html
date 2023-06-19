@@ -8,42 +8,30 @@
     <link rel="stylesheet" href="./grid.css">
     <title>Document</title>
     <style>
+         html {
+            padding: var(--col-gap);
+        }
+
+        [class*="card"]>.col {
+            padding: var(--col-gap);
+            box-sizing: border-box;
+        }
+
         .card {
-            border: 1px solid #666;
-            border-radius: 3px;
+            outline: 1px solid #8f8f8f;
+            display: flex;
             display: flex;
             flex-wrap: wrap;
-            
+            justify-content: center;
+            align-items: center;
+            padding: var(--col-gap);
         }
-        img{
+
+        .pic img {
             width: 100%;
         }
-
-        /* .txt {
-            padding: 3px;
-        } */
-        
-
-
-        @media screen and (min-width:768px){
-            /* .card {
-                display: block;        
-            } */
-            .card img {
-                width: 100%;
-                
-            }
-        }
-
-        @media screen and (min-width:1024px){
-            .card {
-                display: block;        
-            }
-            .card img {
-                width: 100%;
-                
-            }
-        }
+    
+              
     </style>
 </head>
 
