@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>随机抽取餐厅</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>咦~中午吃什麼?</h1>
+  <button id="randomButton">點擊抽取</button>
+  <h2 id="result"></h2>
+
+  <script>
+    // 餐廳列表
+    var restaurants = [
+      "廚餘街",
+      "烤肉飯",
+      "忠孝東路走九遍",
+      "BS後面",
+      "學餐"
+    ];
+
+    // 獲取按鈕以及結果
+    var randomButton = document.getElementById("randomButton");
+    var resultElement = document.getElementById("result");
+
+    // 按鈕點擊事件
+    randomButton.addEventListener("click", function() {
+      // 生成一個隨機索引
+      var randomIndex = Math.floor(Math.random() * restaurants.length);
+      
+      // 抽取結果
+      resultElement.textContent = "今天吃：" + restaurants[randomIndex];
+    });
+  </script>
+</body>
+</html>
