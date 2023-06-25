@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Shopline</title>
+  <style>
+    .container {
+  margin-top: 50px;
+}
+
+.text-block {
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+.arch-container {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.arch-slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.arch-slide {
+  flex: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.arch-slide.active {
+  opacity: 1;
+}
+
+.arch-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.arch-container::after {
+  content: "";
+  position: absolute;
+  bottom: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300%;
+  height: 300px;
+  background-color: #f8f9fa;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+  </style>
+</head>
+<body>
+
+    
+      
+  <!-- 导航栏 -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Shopline</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">首页</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">产品</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">关于</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">联系我们</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <div class="container mt-5">
+    <div class="jumbotron">
+      <h1 class="display-4">欢迎来到Shopline</h1>
+      <p class="lead">一个创新的在线购物平台</p>
+      <hr class="my-4">
+      <p>发现最新的时尚趋势和热门产品</p>
+      <a class="btn btn-primary btn-lg" href="#" role="button">了解更多</a>
+    </div>
+
+    <!-- <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="image1.jpg" class="card-img-top" alt="Product 1">
+          <div class="card-body">
+            <h5 class="card-title">产品名称</h5>
+            <p class="card-text">产品描述</p>
+            <a href="#" class="btn btn-primary">查看详情</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="image2.jpg" class="card-img-top" alt="Product 2">
+          <div class="card-body">
+            <h5 class="card-title">产品名称</h5>
+            <p class="card-text">产品描述</p>
+            <a href="#" class="btn btn-primary">查看详情</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="image3.jpg" class="card-img-top" alt="Product 3">
+          <div class="card-body">
+            <h5 class="card-title">产品名称</h5>
+            <p class="card-text">产品描述</p>
+            <a href="#" class="btn btn-primary">查看详情</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="your-image.jpg" alt="支持海内外电商金流和物流一次搞定" class="img-fluid">
+      </div>
+      <div class="col-md-6">
+        <div class="content-block">
+          <h4>支持海内外电商金流、物流一次搞定</h4>
+          <p>支持在地及国际金流、物流串接服务，提供海内外顾客最便利的付款及送货服务，加速消费者完成下单交易，大幅降低购物车放弃率！</p>
+          <ul class="list-unstyled">
+            <li>线上/线下信用卡刷卡</li>
+            <li>多温层宅配并指定运费</li>
+            <li>第三方金流/行动支付整合</li>
+            <li>超商/宅配货到付款</li>
+            <li>超商代码/条码缴费</li>
+            <li>发票开立与串接</li>
+            <li>了解更多金物流</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- 页脚 -->
+  <footer class="footer bg-dark text-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>關於我們</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">人才招募</a></li>
+            <li><a href="#">媒體專區</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>網路開店</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">特色總覽</a></li>
+            <li><a href="#">功能介紹</a></li>
+            <li><a href="#">版型主題</a></li>
+            <li><a href="#">客戶案例</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>社群購物</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">特色總覽</a></li>
+            <li><a href="#">功能介紹</a></li>
+            <li><a href="#">IG 直播 +1</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-4">
+          <h5>零售 POS</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">特色總覽</a></li>
+            <li><a href="#">功能介紹</a></li>
+            <li><a href="#">週邊硬體</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>我要開店</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">開店方案</a></li>
+            <li><a href="#">開店說明會</a></li>
+            <li><a href="#">開店諮詢</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>更多資源</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">新手問答</a></li>
+            <li><a href="#">電商教室</a></li>
+            <li><a href="#">電商成長學苑</a></li>
+            <li><a href="#">DreamBig 創品牌</a></li>
+            <li><a href="#">SHOPLINE TRENDS 電商數據庫</a></li>
+            <li><a href="#">顧問陪跑計劃</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <h6>合作機會</h6>
+          <p>認識團隊</p>
+        </div>
+  
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

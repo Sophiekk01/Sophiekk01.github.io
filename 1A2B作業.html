@@ -5,8 +5,172 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+   <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #161616;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 48px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    input[type="text"] {
+      display: block;
+      margin: 0 auto;
+      padding: 10px;
+      width: 200px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      outline: none;
+    }
+
+    button {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      background-color: #00ffcc;
+      color: #161616;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00e6b8;
+    }
+
+    ul {
+      list-style: none;
+      margin-top: 20px;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      padding: 5px;
+      background-color: #222;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    #answer {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  </style>
+   </style>
+     
+    
+  
+    
 </head>
+
 <body>
     
+<h1>1A2B 遊戲</h1>
+  <p>請輸入4個不重複的數字。</p>
+  <input type="text" id="guess" maxlength="4" />
+  <button type="button" onclick="checkGuess()">猜!</button>
+  <button type="button" onclick="resetGame()">重來</button>
+  <button type="button" onclick="showAnswer()">看答案</button>
+  <ul id="result"></ul>
+  <p id="answer"></p>
+
+  <script type="text/javascript">
+    var answer = generateAnswer(); // 生成答案
+    var attempts = 0; // 猜測次數
+
+    function generateAnswer() {
+      var digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      var answer = [];
+      for (var i = 0; i < 4; i++) {
+        var randomIndex = Math.floor(Math.random() * digits.length);
+        answer.push(digits[randomIndex]);
+        digits.splice(randomIndex, 1);
+      }
+      return answer;
+    }
+
+    function checkGuess() {
+      var guess = document.getElementById("guess").value;
+      if (guess.length !== 4 || isNaN(guess)) {
+        alert("請輸入四位數字！");
+        return;
+      }
+
+      var guessArray = guess.split("").map(Number);
+      var result = compareGuess(guessArray);
+
+      attempts++;
+      document.getElementById("result").innerHTML +=
+        "<li>猜測 #" + attempts + ": " + guess + " - " + result + "</li>";
+
+      if (result === "4A0B") {
+        document.getElementById("result").innerHTML +=
+          "<li>恭喜猜對！答案是: " + guess + "</li>";
+        document.getElementById("submit").disabled = true;
+      }
+
+      document.getElementById("guess").value = "";
+    }
+
+    function compareGuess(guess) {
+      var countA = 0;
+      var countB = 0;
+
+      for (var i = 0; i < guess.length; i++) {
+        if (guess[i] === answer[i]) {
+          countA++;
+        } else if (answer.includes(guess[i])) {
+          countB++;
+        }
+      }
+
+      return countA + "A" + countB + "B";
+    }
+
+    function showAnswer() {
+      document.getElementById("answer").innerHTML =
+        "答案是: " + answer.join("");
+    }
+
+    function resetGame() {
+      answer = generateAnswer();
+      attempts = 0;
+      document.getElementById("result").innerHTML = "";
+      document.getElementById("answer").innerHTML = "";
+      document.getElementById("submit").disabled = false;
+      document.getElementById("guess").value = "";
+    }
+  </script>
+
 </body>
 </html>
