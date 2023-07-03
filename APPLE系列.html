@@ -53,15 +53,10 @@
             <option value="粉紅色">粉紅色</option>
             <option value="紫色">紫色</option>
             <option value="星光色">星光色</option>
-            <option value="金色">金色</option>
-            <option value="銀色">銀色</option>
-            <option value="灰色">灰色</option>
         </select>
         <select id="storage">
             <option value="64GB">64GB</option>
-            <option value="128GB">128GB</option>
             <option value="256GB">256GB</option>
-            <option value="512GB">512GB</option>
         </select>
         <select id="network">
             <option value="Cellular">WiFi+行動網路</option>
@@ -205,187 +200,137 @@
                                 <h2>512GB</h2><br>NT$38,400 起
                             </button>
                         </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            
+
+                                <!-- <img id="image" src="./Apple/" alt=""> -->
 
 
 
-                        <!-- <img id="image" src="./Apple/" alt=""> -->
 
 
 
 
+                            </div>
 
-
-
+                        </div>
                     </div>
+                    <p id="price"></p>
+                    <script>
 
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-            <div class="row" style="padding: 0 32px; margin-top: 60px;">
-                <div class="col-md-6">
-                    <img id="image" class="productimage" src="Apple/blue.png"
-                        style="width: 100%;  border-radius: 20px;">
-                </div>
-                <div class="col-md-6">
-                    <h1>Color</h1>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <button data="金色" class="btn-color color-select btn-outline-dark"
-                                onclick="document.getElementById('color').value = '金色'">
-                                <img src="./Apple/iPhone_try_gold.png" alt="" style="width: 30px;"><br>
-                                gold</button>
-                        </div>
-                        <div class="col-md-6">
-                            <button data="銀色" class="btn-color color-select btn-outline-dark"
-                                onclick="document.getElementById('color').value = '銀色'">
-                                <img src="./Apple/iPhone_try_silver.png" alt=""
-                                    style="width: 30px;"><br>silver</button>
-                        </div>
-                        <div class="col-md-6">
-                            <button data="灰色" class="btn-color color-select btn-outline-dark"
-                                onclick="document.getElementById('color').value = '灰色'">
-                                <img src="./Apple/iPhone_try_graphite.png" alt=""
-                                    style="width: 30px;"><br>gray</button>
-                        </div>
+                        let orgurl = './Apple/'
 
-                    </div>
+                        let string1 = `字串${orgurl}`
+                        let string2 = "字串" + orgurl
 
+                        var products = []; // 包含 iPad 数据的数组，可以在代码中初始化或通过 Ajax 请求从 JSON 文件中获取
 
-                    <h1>Storage</h1>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <button data="256GB" class="btn-storage color-select btn-outline-dark"
-                                onclick="document.getElementById('storage').value = '256GB'">
-                                <h2>256GB</h2><br>NT$37,900 起
-                            </button>
-                        </div>
-                        <div class="col-md-6">
-                            <button data="512GB" class="btn-storage color-select btn-outline-dark"
-                                onclick="document.getElementById('storage').value = '512GB'">
-                                <h2>512GB</h2><br>NT$46,900 起
-                            </button>
-                        </div>
+                        var request = new XMLHttpRequest();
+                        request.open("GET", "https://raw.githubusercontent.com/Sophiekk01/FileStorage/main/iPad.json", true);
 
-                    </div>
-                </div>
+                        request.onreadystatechange = function () {
+                            if (request.readyState === 4 && request.status === 200) {
+                                products = JSON.parse(request.responseText);
+                            }
+                        };
+                        request.send();
 
-            </div>
-        </div>
-        <p id="price"></p>
-        <script>
+                        // 添加事件监听器
+                        document.getElementById("device").addEventListener("change", updatePriceAndImage);
+                        document.getElementById("color").addEventListener("change", updatePriceAndImage);
+                        document.getElementById("storage").addEventListener("change", updatePriceAndImage);
+                        document.getElementById("network").addEventListener("change", updatePriceAndImage);
 
-            let orgurl = './Apple/'
+                        function updatePriceAndImage() {
+                            console.log('updatePriceAndImage')
+                            var selectedDevice = document.getElementById("device").value;
+                            var selectedColor = document.getElementById("color").value;
+                            var selectedStorage = document.getElementById("storage").value;
+                            var selectedNetwork = document.getElementById("network").value;
 
-            let string1 = `字串${orgurl}`
-            let string2 = "字串" + orgurl
+                            console.log('selectedColor' + selectedColor)
+                            console.log('selectedStorage' + selectedStorage)
+                            console.log('selectedNetwork' + selectedNetwork)
 
-            var products = []; // 包含 iPad 数据的数组，可以在代码中初始化或通过 Ajax 请求从 JSON 文件中获取
+                            console.log('...' + products[0].color)
 
-            var request = new XMLHttpRequest();
-            request.open("GET", "https://raw.githubusercontent.com/Sophiekk01/FileStorage/main/iPad.json", true);
-
-            request.onreadystatechange = function () {
-                if (request.readyState === 4 && request.status === 200) {
-                    products = JSON.parse(request.responseText);
-                }
-            };
-            request.send();
-
-            // 添加事件监听器
-            document.getElementById("device").addEventListener("change", updatePriceAndImage);
-            document.getElementById("color").addEventListener("change", updatePriceAndImage);
-            document.getElementById("storage").addEventListener("change", updatePriceAndImage);
-            document.getElementById("network").addEventListener("change", updatePriceAndImage);
-
-            function updatePriceAndImage() {
-                console.log('updatePriceAndImage')
-                var selectedDevice = document.getElementById("device").value;
-                var selectedColor = document.getElementById("color").value;
-                var selectedStorage = document.getElementById("storage").value;
-                var selectedNetwork = document.getElementById("network").value;
-
-                console.log('selectedColor' + selectedColor)
-                console.log('selectedStorage' + selectedStorage)
-                console.log('selectedNetwork' + selectedNetwork)
-
-                console.log('...' + products[0].color)
-
-                document.querySelectorAll(".btn-color").forEach(element => {
-                    element.classList.remove("selected")
-                })
-                document.querySelectorAll(".btn-storage").forEach(element => {
-                    element.classList.remove("selected")
-                })
-                document.querySelectorAll(".btn-network").forEach(element => {
-                    element.classList.remove("selected")
-                })
-                document.querySelector(`[data="${selectedColor}"]`).classList.add("selected")
-                document.querySelector(`[data="${selectedStorage}"]`).classList.add("selected")
-                document.querySelector(`[data="${selectedNetwork}"]`).classList.add("selected")
-                var filteredcolorandstorage = products.filter(function (products) {
-                    return (
-                        products.device === selectedDevice &&
-                        products.color === selectedColor &&
-                        products.storage === selectedStorage
-                    );
-                });
-                if (selectedDevice == "iPad") {
-                    var filteredproducts = filteredcolorandstorage.filter(function (products) {
-                        return (
-                            products.network === selectedNetwork
-                        );
-                    });
-                } else {
-                    var filteredproducts = filteredcolorandstorage
-                }
+                            document.querySelectorAll(".btn-color").forEach(element => {
+                                element.classList.remove("selected")
+                            })
+                            document.querySelectorAll(".btn-storage").forEach(element => {
+                                element.classList.remove("selected")
+                            })
+                            document.querySelectorAll(".btn-network").forEach(element => {
+                                element.classList.remove("selected")
+                            })
+                            document.querySelector(`[data="${selectedColor}"]`).classList.add("selected")
+                            document.querySelector(`[data="${selectedStorage}"]`).classList.add("selected")
+                            document.querySelector(`[data="${selectedNetwork}"]`).classList.add("selected")
+                            var filteredcolorandstorage = products.filter(function (products) {
+                                return (
+                                    products.device === selectedDevice &&
+                                    products.color === selectedColor &&
+                                    products.storage === selectedStorage
+                                );
+                            });
+                            if (selectedDevice == "iPad") {
+                                var filteredproducts = filteredcolorandstorage.filter(function (products) {
+                                    return (
+                                        products.network === selectedNetwork
+                                    );
+                                });
+                            } else {
+                                var filteredproducts = filteredcolorandstorage
+                            }
 
 
-                console.log(filteredproducts)
-                if (filteredproducts.length > 0) {
-                    var price = filteredproducts[0].price;
-                    var imageSrc = filteredproducts[0].picture;
+                            console.log(filteredproducts)
+                            if (filteredproducts.length > 0) {
+                                var price = filteredproducts[0].price;
+                                var imageSrc = filteredproducts[0].picture;
 
-                    document.getElementById("price").textContent = "價格：" + price;
+                                document.getElementById("price").textContent = "價格：" + price;
 
-                    imageSrc = orgurl + imageSrc
+                                imageSrc = orgurl + imageSrc
 
-                    console.log(document.getElementById("image").src)
+                                console.log(document.getElementById("image").src)
 
-                    // document.getElementById("image").src = imageSrc;
-                    document.querySelectorAll(".productimage").forEach(element => {
-                        element.src = imageSrc;
-                    })
-                    console.log("picture:" + imageSrc)
-                } else {
-                    document.getElementById("price").textContent = "未找到匹配的 iPad 型號。";
-                    document.querySelectorAll(".productimage").forEach(element => {
-                        element.src = "";
-                    })
+                                // document.getElementById("image").src = imageSrc;
+                                document.querySelectorAll(".productimage").forEach(element => {
+                                    element.src = imageSrc;
+                                })
+                                console.log("picture:" + imageSrc)
+                            } else {
+                                document.getElementById("price").textContent = "未找到匹配的 iPad 型號。";
+                                document.querySelectorAll(".productimage").forEach(element => {
+                                    element.src = "";
+                                })
 
-                }
-            }
-        </script>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-            </script>
+                            }
+                        }
+                    </script>
+                    <!-- Bootstrap JavaScript Libraries -->
+                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+                        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+                        crossorigin="anonymous">
+                        </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-            integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-            </script>
-        <script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+                        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+                        crossorigin="anonymous">
+                        </script>
+                    <script>
 
-            function toggleSelected(el) {
-                this.classList.toggle("selected")
-            }
-            document.querySelectorAll(".color-select").forEach(element => {
-                element.addEventListener("click",
-                    updatePriceAndImage
-                )
+                        function toggleSelected(el) {
+                            this.classList.toggle("selected")
+                        }
+                        document.querySelectorAll(".color-select").forEach(element => {
+                            element.addEventListener("click",
+                                updatePriceAndImage
+                            )
 
-            });
-        </script>
+                        });
+                    </script>
 </body>
 
 </html>

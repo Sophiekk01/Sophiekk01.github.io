@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8' />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://momentjs.com/downloads/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/main.global.min.js"></script>
+
+
+    <script>
+
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     var calendarEl = document.getElementById('calendar');
+        //     var calendar = new FullCalendar.Calendar(calendarEl, {
+        //         initialView: 'dayGridMonth'
+        //     });
+        //     calendar.render();
+        // });
+
+        document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: "dayGridMonth",
+        editable: true, // 編輯
+        selectable: true, // 可選
+        events: [
+          // 初始事件
+          {
+            title: "讀書",
+            start: moment().add(1, "days").format("YYYY-MM-DD"),
+            textColor: "black",
+            color: "beige",
+          },
+        ],
+        eventClick: function (info) {
+          // 回調函數
+          var title = prompt("請輸入新標題", info.event.title);
+          if (title) {
+            info.event.setProp("title", title);
+          }
+        },
+        dateClick: function (info) {
+          // 日期單擊回調函數
+          var title = prompt("輸入活動標題");
+          if (title) {
+            var startTime = prompt("輸入開始時間（HH:mm）");
+            var endTime = prompt("輸入結束時間（HH:mm）");
+            if (startTime && endTime) {
+              var startDateTime = moment(info.dateStr + " " + startTime, "YYYY-MM-DD HH:mm");
+              var endDateTime = moment(info.dateStr + " " + endTime, "YYYY-MM-DD HH:mm");
+              if (startDateTime.isValid() && endDateTime.isValid()) {
+                var event = {
+                  title: title,
+                  start: startDateTime.format("YYYY-MM-DD HH:mm"),
+                  end: endDateTime.format("YYYY-MM-DD HH:mm"),
+                  backgroundColor: "blue", // 修改背景顏色
+                };
+                calendar.addEvent(event);
+              } else {
+                alert("時間格式無效");
+              }
+            } else {
+              alert("請輸入開始時間跟結束時間");
+            }
+          }
+        },
+        eventDrop: function (info) {
+          // 日期拖曳回調函數
+          var newStart = moment(info.event.start).format("YYYY-MM-DD");
+          var newEnd = moment(info.event.end).format("YYYY-MM-DD");
+          console.log("開始日期：" + newStart);
+          console.log("結束日期：" + newEnd);
+          console.log("事件標題：" + info.event.title);
+        },
+        eventResize: function (info) {
+          // 日期大小調整回調函數
+          var newStart = moment(info.event.start).format("YYYY-MM-DD");
+          var newEnd = moment(info.event.end).format("YYYY-MM-DD");
+          console.log("開始日期：" + newStart);
+          console.log("結束日期：" + newEnd);
+          console.log("事件標題：" + info.event.title);
+        },
+        eventClick: function (info) {
+          // 事件點擊回調函數
+          if (confirm("確定要刪除嗎？")) {
+            info.event.remove();
+          }
+        },
+      });
+      //用於將日曆渲染到指定的DOM元素上
+      //是將FullCalendar日曆渲染到页面中具有id为"calendar"的元素中
+      calendar.render();
+    });
+
+    
+    </script>
+</head>
+
+<body>
+    <div id='calendar'></div>
+</body>
+
+</html>

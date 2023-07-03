@@ -42,7 +42,7 @@
     let string1 = `字串${orgurl}`
     let string2 = "字串"+orgurl
 
-    var iPads = []; // 包含 iPad 数据的数组，可以在代码中初始化或通过 Ajax 请求从 JSON 文件中获取
+    var iPads = []; // 包含 iPad 數據的數組，可以在代碼中初始化或通過 Ajax 請求從 JSON 文件中獲取
   
     var request = new XMLHttpRequest();
     request.open("GET", "https://raw.githubusercontent.com/Sophiekk01/FileStorage/main/iPad.json", true);
@@ -54,7 +54,7 @@
     };
     request.send();
 
-    // 添加事件监听器
+
     document.getElementById("color").addEventListener("change", updatePriceAndImage);
     document.getElementById("storage").addEventListener("change", updatePriceAndImage);
     document.getElementById("network").addEventListener("change", updatePriceAndImage);

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #fde8e8;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #ff6b6b;
+    }
+
+    .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-gap: 10px;
+    }
+
+    .day {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffcccc;
+        border-radius: 5px;
+        padding: 10px;
+        font-weight: bold;
+        color: #ff6b6b;
+        font-size: 18px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 5px;
+        width: 80%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #ff6b6b;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modal h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ff6b6b;
+    }
+
+    .modal form label {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .modal form input[type="date"],
+    .modal form input[type="time"],
+    .modal form input[type="color"],
+    .modal form textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+
+    .modal form button {
+        background-color: #ff6b6b;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .modal form button:hover {
+        background-color: #ff4d4d;
+    }
+</style>
+
+    <script>
+        let currentTimeNow = new Date()
+        currentTimeNow.setDate(1);
+        let currentMonth = currentTimeNow.getUTCMonth()
+        let currentYear = currentTimeNow.getUTCFullYear()
+        let dayOfWeek = currentTimeNow.getDay()
+        let weekArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+        let nextMonth = document.querySelector("#nextmonth")
+        let lastMonth = document.querySelector("#lastmonth")
+        let dateBlock = document.querySelectorAll("#day")
+        let title = document.querySelector(".title")
+
+        function createCalculator(alice) {
+            title.textContent = ''
+            title.append(`${currentMonth + 1}月${currentYear}`)
+            dateBlock.forEach((item) => {
+                item.innerHTML = ''
+            })
+            for (i = 1; i < 32; i++) {
+                let locationOfCalculator = document.querySelector('.date' + (alice + i))
+                let button = `<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">創建行程</a>`
+                locationOfCalculator.innerHTML = `${i}` + button
+            }
+        }
+        window.onload = function () {
+            createCalculator(dayOfWeek)
+
+        }
+        nextMonth.addEventListener("click", function () {
+            currentMonth += 1;
+            if (currentMonth > 11) {
+                currentMonth -= 12
+                currentYear += 1
+                currentTimeNow.setUTCFullYear(currentYear)
+            }
+            currentTimeNow.setMonth(currentMonth);
+            dayOfWeek = currentTimeNow.getDay();
+            createCalculator(dayOfWeek);
+        });
+        lastMonth.addEventListener("click", function () {
+            currentMonth -= 1;
+            if (currentMonth < 0) {
+                currentMonth += 12
+                currentYear -= 1
+                currentTimeNow.setUTCFullYear(currentYear)
+            }
+            currentTimeNow.setMonth(currentMonth);
+            dayOfWeek = currentTimeNow.getDay();
+            createCalculator(dayOfWeek);
+        });
+
+
+        let inputDate = document.querySelector("#date")
+        let inputTime = document.querySelector("#time")
+        let inputColor = document.querySelector("#color")
+        let inputText = document.querySelector("#text")
+        let save = document.querySelector("#save")
+
+        let jsonData = {};
+        let data = {}
+        let item
+        let zzz
+        let asd
+        function saveInputDate() {
+            data = {
+                date: inputDate.value,
+                time: inputTime.value,
+                color: inputColor.value,
+                text: inputText.value
+            }
+            asd = JSON.stringify(data)
+
+            for (let a = 0; a < localStorage.length + 1; a++) {
+                if (localStorage.getItem('data' + a) == null) {
+                    localStorage.setItem(`data${a}`, asd);
+                    break;
+                }
+            }
+        }
+       
+        save.addEventListener("click", saveInputDate)
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title"></h1>
+        <div class="calendar">
+            <div class="day">1 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">創建行程</a></div>
+            <!-- Add more day elements here -->
+        </div>
+    </div>
+
+    <div id="exampleModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>行程詳情</h2>
+            <form>
+                <label for="date">日期:</label>
+                <input type="date" id="date" name="date" required><br><br>
+                
+                <label for="time">時間:</label>
+                <input type="time" id="time" name="time" required><br><br>
+                
+                <label for="color">行程背景顏色:</label>
+                <input type="color" id="color" name="color" required><br><br>
+                
+                <label for="text">行程內容:</label>
+                <textarea id="text" name="text" required></textarea><br><br>
+                
+                <button type="button" id="save">儲存</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal script
+        var modal = document.getElementById("exampleModal");
+        var btns = document.querySelectorAll("[data-target='#exampleModal']");
+        var closeBtn = document.getElementsByClassName("close")[0];
+
+        btns.forEach(function (btn) {
+            btn.onclick = function () {
+                modal.style.display = "block";
+            };
+        });
+
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+</body>
+</html>
