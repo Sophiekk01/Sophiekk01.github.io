@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fde8e8;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .btn {
+            background-color: orange;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .weekdays {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .day {
+            width: calc(100% / 7);
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .today {
+            background-color: orange;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="date"],
+        input[type="time"],
+        input[type="color"],
+        textarea {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            background-color: orange;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-between p-3">
+            <button id="back" class="col-2 btn btn_orange">Back</button>
+            <h2 id="yearMonth" class="col-6 text-center">January 2024</h2>
+            <button id="next" class="col-2 btn btn_orange">Next</button>
+        </div>
+        <div class="weekdays">
+            <div class="day">Sunday</div>
+            <div class="day">Monday</div>
+            <div class="day">Tuesday</div>
+            <div class="day">Wednesday</div>
+            <div class=vscode-file://vscode-app/c:/Users/sophie/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html"day">Thursday</div>
+            <div class="day">Friday</div>
+            <div class="day">Saturday</div>
+        </div>
+        <div id="calendar" class="calendar row"></div>
+    </div>
+
+    <div id="exampleModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>New Event</h2>
+            <form>
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+
+                <label for="time">Time:</label>
+                <input type="time" id="time" required>
+
+                <label for="color">Color:</label>
+                <input type="color" id="color" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" rows="4" required></textarea>
+
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var date = new Date();
+            var currentYear = date.getFullYear();
+            var currentMonth = date.getMonth();
+            var currentDay = date.getDate();
+
+            function updateCalendar() {
+                var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                var firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+
+                var calendar = document.getElementById('calendar');
+                calendar.innerHTML = '';
+
+                var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                for (var i = 0; i < daysOfWeek.length; i++) {
+                    var dayOfWeek = daysOfWeek[i];
+                    var dayElement = document.createElement('div');
+                    dayElement.classList.add('day');
+                    dayElement.textContent = dayOfWeek;
+                    calendar.appendChild(dayElement);
+                }
+
+                for (var i = 1; i <= daysInMonth; i++) {
+                    var dayElement = document.createElement('div');
+                    dayElement.classList.add('day');
+                    dayElement.textContent = i;
+
+                    if (i === currentDay && currentMonth === date.getMonth() && currentYear === date.getFullYear()) {
+                        dayElement.classList.add('today');
+                    }
+
+                    calendar.appendChild(dayElement);
+                }
+
+                var dayElements = document.querySelectorAll('.day');
+                dayElements.forEach(function (dayElement) {
+                    dayElement.addEventListener('click', function () {
+                        var day = dayElement.textContent;
+                        var formattedDate = currentYear + '-' + (currentMonth + 1).toString().padStart(2, '0') + '-' + day;
+                        document.getElementById('date').value = formattedDate;
+                        document.getElementById('exampleModal').style.display = 'block';
+                    });
+                });
+            }
+
+            function previousMonth() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                updateCalendar();
+            }
+
+            function nextMonth() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                updateCalendar();
+            }
+
+            updateCalendar();
+
+            var closeButton = document.querySelector('.close');
+            closeButton.addEventListener('click', function () {
+                document.getElementById('exampleModal').style.display = 'none';
+            });
+
+            var form = document.querySelector('form');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                var date = document.getElementById('date').value;
+                var time = document.getElementById('time').value;
+                var color = document.getElementById('color').value;
+                var description = document.getElementById('description').value;
+
+                console.log('Date:', date);
+                console.log('Time:', time);
+                console.log('Color:', color);
+                console.log('Description:', description);
+
+                document.getElementById('exampleModal').style.display = 'none';
+            });
+
+            var backButton = document.getElementById('back');
+            backButton.addEventListener('click', previousMonth);
+
+            var nextButton = document.getElementById('next');
+            nextButton.addEventListener('click', nextMonth);
+        });
+    </script>
+</body>
+
+</html>

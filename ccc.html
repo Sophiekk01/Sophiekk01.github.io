@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        .container {
+            max-width: 770px;
+            background: linear-gradient(135deg, #f9dcdc, #f5e7e7);
+        }
+
+        #yearMonth {
+            color: #ff6f69;
+            font-weight: bold;
+        }
+
+        .btn_orange {
+            color: #ff85a1;
+            background-color: #ffcee3;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn_orange:hover {
+            color: #ffffff;
+            background-color: #ff85a1;
+        }
+
+        .weekdays>div {
+            width: 100px;
+            margin: 0 5px;
+            text-align: center;
+            color: #ff85a1;
+            border-radius: 5px;
+        }
+
+        .calendar>div {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+
+
+            backgr .cur {
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .note {
+                color: #ff6f69;
+                position: absolute;
+                bottom: 5px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 14px;
+                margin: 0;
+                padding: 0;
+            }
+    </style>
+
+</head>
+
+<body class="">
+    <div class="container">
+        <div class="row justify-content-between p-3">
+            <button id="back" class="col-2 btn btn_orange">
+                << </button>
+                    <h2 id="yearMonth" class="col-6 text-center">January 2024</h2>
+                    <button id="next" class="col-2 btn btn_orange"> >> </button>
+        </div>
+        <div class="weekdays row">
+            <div>Sunday</div>
+            <div>Monday</div>
+            <div>Tuesday</div>
+            <div>Wednesday</div>
+            <div>Thursday</div>
+            <div>Friday</div>
+            <div>Saturday</div>
+        </div>
+        <div id="calendar" class="calendar row">
+            <div></div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">1</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">2</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">3</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">4</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">5</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">6</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">7</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">8</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">9</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">10</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">11</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">12</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">13</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">14</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">15</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">16</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">17</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">18</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">19</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">20</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">21</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">22</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">23</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">24</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">25</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">26</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">27</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">28</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">29</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">30</div>
+            <div class="cur" data-bs-toggle="modal" data-bs-target="#recordModal">31</div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="recordModal" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDate"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input class="w-100 rounded-3" type="text" id="eventTitle" placeholder="Event Title">
+                    <input class="w-100 rounded-3 mt-2" type="time" id="eventTime" placeholder="Event Time">
+                    <input class="w-100 rounded-3 mt-2" type="color" id="eventColor" value="#ffcee3"
+                        placeholder="Event Color">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="saveBtn" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    <button type="button" id="reviseBtn" class="d-none btn btn-info">Revise</button>
+                    <button type="button" id="deleteBtn" class="d-none btn btn-danger"
+                        data-bs-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        // ... 
+
+        btnDelete.addEventListener('click', () => {
+            // ... (your existing code)
+            modal.querySelector('input').value = '';
+            modal.querySelector('#eventTime').value = '';
+        });
+
+        btnSave.addEventListener('click', () => {
+            // ... 
+            let eventTime = modal.querySelector('#eventTime').value;
+            if (text != '') {
+                eventRecords.forEach((item, idx) => {
+                    // ... (your existing code)
+                });
+                let upload = { data: `${Arr.year}/${Arr.month + 1}/${selectedDay}`, text: text, time: eventTime };
+                eventRecords.push(upload);
+                let arrayToString = JSON.stringify(eventRecords);
+                localStorage.setItem('calenderRe', arrayToString);
+                divs[selectedDivIndex].innerHTML += `<p class="note">${text}</p><p class="note">${eventTime}</p>`;
+            }
+            console.log(eventRecords);
+        });
+
+
+        btnSave.addEventListener('click', () => {
+            let eventColor = modal.querySelector('#eventColor').value;
+
+            // ... 
+
+            if (text != '') {
+                // ... 
+                divs[selectedDivIndex].style.backgroundColor = eventColor;
+            }
+            console.log(eventRecords);
+        });
+
+
+        btnRevise.addEventListener('click', () => {
+            let modal = document.querySelector("#recordModal");
+            modal.querySelector('#eventTitle').removeAttribute("disabled", '');
+            modal.querySelector('#eventTime').removeAttribute("disabled", '');
+            btnSave.classList.remove("d-none");
+            btnRevise.classList.add("d-none");
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script>
+
+
+        let events = [];           // 存儲事件的數組
+        let selectedDay = -1;      // 當前選擇的日期
+        let inputText = '';        // 輸入框的文本內容
+        let selectedDivIndex = -1; // 當前選擇的日曆元素索引
+        let currentDate;           // 當前日期
+        let eventRecords = [];     // 存儲事件記錄的數組
+
+        if (JSON.parse(localStorage.getItem('calenderRe'))) {
+            eventRecords = JSON.parse(localStorage.getItem('calenderRe'));
+        }
+
+        console.log(eventRecords);
+
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        window.onload = function () {
+            let back = document.querySelector('#back');
+            let next = document.querySelector('#next');
+            let btnSave = document.querySelector('#saveBtn');
+            let btnRevise = document.querySelector('#reviseBtn');
+            let btnDelete = document.querySelector('#deleteBtn');
+            let currentDay = new Date();
+            console.log(currentDay);
+            let Arr = getDayss(currentDay);
+            console.log(Arr);
+
+
+
+            let calendar = document.querySelector('#calendar');
+
+            switchCalendar(Arr);
+
+            next.addEventListener("click", () => {
+                currentDay.setMonth(currentDay.getMonth() + 1);
+                console.log(currentDay);
+                Arr = getDayss(currentDay);
+                switchCalendar(Arr);
+            })
+
+            back.addEventListener("click", () => {
+                currentDay.setMonth(currentDay.getMonth() - 1);
+                console.log(currentDay);
+                Arr = getDayss(currentDay);
+                switchCalendar(Arr);
+            })
+
+            btnDelete.addEventListener('click', () => {
+                let modal = document.querySelector("#recordModal");
+                let text = modal.querySelector('input').value;
+                let divs = document.querySelectorAll('.calendar>div');
+                console.log(currentData);
+                eventRecords.forEach((item, idx) => {
+                    if (item.data == currentData) {
+                        console.log(currentData);
+                        divs[selectedDivIndex].innerHTML = `${selectedDay}`;
+                        eventRecords.splice(idx, 1);
+                        let arrayToString = JSON.stringify(eventRecords);
+                        localStorage.setItem('calenderRe', arrayToString);
+                    }
+                })
+                modal.querySelector('input').value = '';
+            })
+
+            btnSave.addEventListener('click', () => {
+
+                let modal = document.querySelector("#recordModal");
+                let text = modal.querySelector('input').value;
+                let divs = document.querySelectorAll('.calendar>div');
+
+                if (text != '') {
+
+                    eventRecords.forEach((item, idx) => {
+                        if (item.data == currentData) {
+                            eventRecords.splice(idx, 1);
+                            divs[selectedDivIndex].innerHTML = `${selectedDay}`;
+                        }
+                    })
+                    let upload = { data: `${Arr.year}/${Arr.month + 1}/${selectedDay}`, text: text };
+                    eventRecords.push(upload);
+                    let arrayToString = JSON.stringify(eventRecords);
+                    localStorage.setItem('calenderRe', arrayToString);
+                    console.log(selectedDivIndex);
+                    divs[selectedDivIndex].innerHTML += `<p class="note">${text}</p>`;
+                }
+                console.log(eventRecords);
+            })
+
+            btnRevise.addEventListener('click', () => {
+
+                let modal = document.querySelector("#recordModal");
+                modal.querySelector('input').removeAttribute("disabled", '');
+                btnSave.classList.remove("d-none");
+                btnRevise.classList.add("d-none");
+
+            })
+        }
+
+        function getDayss(day) {
+            let years = day.getFullYear();
+            let months = day.getMonth();
+            let week1 = getDayOfweek(years, months);
+            let day1 = getDaysOfMonth(years, months + 1);
+            return { year: years, month: months, dayOfWeek: week1, dayOfMonth: day1 };
+        }
+
+        function getDayOfweek(year, month) {
+            var day = new Date(year, month, 1);
+            var weekday = day.getDay();
+            return weekday;
+        }
+
+        function getDaysOfMonth(year, month) {
+            var day0 = new Date(year, month, 0);
+            var daysOfMonth = day0.getDate();
+            return daysOfMonth;
+        }
+
+        function switchCalendar(Arr) {
+            let yearMonth = document.querySelector('#yearMonth');
+            let month = monthNames[Arr.month];
+            yearMonth.innerText = `${month} ${Arr.year}`;
+
+
+
+            let modal = document.querySelector("#recordModal");
+            let btnS = modal.querySelector('#saveBtn');
+            let btnRe = modal.querySelector('#reviseBtn');
+            let btnDe = modal.querySelector('#deleteBtn');
+
+            calendar.innerHTML = '';
+            for (let i = 0; i < Arr.dayOfWeek; i++) {
+                let div = document.createElement('div');
+                calendar.append(div);
+            }
+            for (let i = 0; i < Arr.dayOfMonth; i++) {
+                let div = document.createElement('div');
+                div.classList.add('cur');
+                div.innerHTML = `${i + 1}`;
+                let thisData = `${Arr.year}/${Arr.month + 1}/${i + 1}`;
+                // console.log(currentData);
+                eventRecords.forEach(i => {
+                    if (i.data == thisData) {
+                        div.innerHTML += `<p class="note">${i.text}</p>`;
+                    }
+                });
+                div.setAttribute("data-bs-toggle", "modal");
+                div.setAttribute("data-bs-target", "#recordModal");
+
+                div.addEventListener("click", () => {
+                    console.log(div);
+                    modal.querySelector('h5').innerText = `${month} ${i + 1}`;
+                    selectedDay = i + 1;
+                    selectedDivIndex = Arr.dayOfWeek + i;
+                    currentData = `${Arr.year}/${Arr.month + 1}/${i + 1}`;
+
+                    console.log(div.querySelector('p'));
+                    inputText = '';
+
+                    if (div.querySelector('p')) {
+                        inputText = div.querySelector('p').innerHTML;
+                        modal.querySelector('input').value = inputText;
+                        modal.querySelector('input').setAttribute("disabled", "");
+
+                        btnS.classList.add('d-none');
+                        btnDe.classList.remove('d-none');
+                        btnRe.classList.remove('d-none');
+                    } else {
+                        modal.querySelector('input').value = inputText;
+                        modal.querySelector('input').removeAttribute("disabled");
+                        btnS.classList.remove('d-none');
+                        btnDe.classList.add('d-none');
+                        btnRe.classList.add('d-none');
+                    }
+
+
+                })
+                calendar.append(div);
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
