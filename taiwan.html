@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        @charset "utf-8";
+
+        @font-face {
+            font-family: GenJyuuGothicX;
+            src: url("./images/GenJyuuGothicX-P-Light.ttf");
+        }
+        [box-id] img{
+            height: 80px;
+            object-fit: cover;
+        }
+
+         h2{
+            background-color: hotpink;
+        }
+        
+        * {
+            box-sizing: border-box;
+            font-family: GenJyuuGothicX, 微軟正黑體, Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .mt-5 {
+            margin-top: 28rem!important;
+            margin-bottom: 25rem!important;
+        }
+        /* body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255 ,255, .5);
+        } */
+
+        body {
+            background: url(./taiwan.jpg), #FDF0D5;
+            background-size: 100%;
+
+        }
+
+        .bg_Lblue {
+            border: solid 3px #d9eef0;
+            background-color: #d9eef0;
+            box-shadow: 0px 15px 15px -10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .bg_Lblue:hover {
+            border: solid 3px #d9eef0;
+            background-color: #d9eef0;
+            box-shadow: 0px 15px 15px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .bg-shadow {
+            box-shadow: 0px 5px 20px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bg-Lyellow {
+            background-color: #fff !important;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div box-id="1" class="col-1"></div>
+            <div box-id="2" class="col-1"></div>
+            <div box-id="3" class="col-1"></div>
+            <div box-id="4" class="col-1"></div>
+            <div box-id="5" class="col-1"></div>
+            <div box-id="6" class="col-1"></div>
+            <div box-id="7" class="col-1"></div>
+            <div box-id="8" class="col-1"></div>
+            <div box-id="9" class="col-1"></div>
+            <div box-id="10" class="col-1"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div box-id="30" class="col-1"></div>
+            <div class="col-8"></div>
+            <div box-id="11" class="col-1"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div box-id="29" class="col-1"></div>
+            <div class="col-8 text-center">
+                <h2>今天想要去哪裡?</h2>
+            </div>
+            <div box-id="12" class="col-1"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div box-id="28" class="col-1"></div>
+            <div class="col-8 text-center">
+                <button id="startBtn" class="btn bg_Lblue">Start</button>
+            </div>
+            <div box-id="13" class="col-1"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div box-id="27" class="col-1"></div>
+            <div class="col-8"></div>
+            <div box-id="14" class="col-1"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div box-id="26" class="col-1"></div>
+            <div class="col-8"></div>
+            <div box-id="15" class="col-1"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div box-id="25" class="col-1"></div>
+            <div box-id="24" class="col-1"></div>
+            <div box-id="23" class="col-1"></div>
+            <div box-id="22" class="col-1"></div>
+            <div box-id="21" class="col-1"></div>
+            <div box-id="20" class="col-1"></div>
+            <div box-id="19" class="col-1"></div>
+            <div box-id="18" class="col-1"></div>
+            <div box-id="17" class="col-1"></div>
+            <div box-id="16" class="col-1"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="figureModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content p-3">
+                <button type="button" class="ms-auto btn-close" data-bs-dismiss="modal"></button>
+                <img class="w-50 mx-auto" src="./chunag.png" alt="">
+                <h5 class="text-center fw-bold">今天想要去哪裡?</h5>
+                <span class="fw-bold mb-2">特色：</span>
+                <p id="character">自然美景、神秘感、文化歷史</p>
+                <span class="fw-bold mb-2">詳細介紹：</span>
+                <p id="character-text">
+                    自然美景：
+                    <br>蓮潭池被茂密的樹林所環繞，湖泊平靜如鏡，呈現出迷人的水景景觀。
+                    <br>湖中散布著許多蓮花，特別是在夏季時，湖面上盛開著綻放的蓮花，給人一種優雅和寧靜的感覺。
+                    <br>這裡的自然環境相當清幽，適合散步和放鬆心情。
+                    神秘感：
+                    <br>蓮潭池散發著一種神秘的氛圍，這源於池塘的傳說和歷史背景。
+                    <br>人們相傳，曾經有一位魔術師在這個地方居住，他以其才華和神秘的個性為這個地方增添了神秘感。
+                    <br>這段傳說賦予了蓮潭池獨特的魅力，吸引著遊客們來探索這個神秘的地方。
+                    文化歷史：
+                    <br>蓮潭池擁有豐富的文化歷史背景。
+                    <br>在古代，這個地方是一個重要的水源地，供應當地居民的用水需求。
+                    <br>同時，它也是一個重要的休憩場所，人們在這裡遊玩、賞景和聚會。
+                    <br>這個地方曾經承載著當地人民的生活和活動，代表著他們的歷史和文化傳統。
+                    旅遊活動：
+                    <br>蓮潭池成為了一個受到遊客喜愛的旅遊目的地。
+                    <br>遊客們可以在這裡漫步於湖畔，欣賞湖面上綻放的蓮花和周圍的自然景觀。
+                    <br>此外，還可以租借船隻，在湖上划船，享受寧靜和放鬆的時刻。
+                    <br>蓮潭池附近還有一些咖啡廳和小吃攤，供應當地美食和飲品，讓遊客在享受自然之餘也能品味當地的美食文化。
+                    </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script>
+        //Modal start===============
+        var myModal = new bootstrap.Modal(document.getElementById('figureModal'), {
+            keyboard: false
+        })
+
+        const figureData = [
+            {
+                id: '1',
+                color: '#ECDCDC',
+                imgUrl: './chunag.png',
+                bless: '中正紀念堂',
+                character:'歷史紀念、宏偉建築、國家象徵',
+                text: 
+                `歷史紀念：
+                    <br>中正紀念堂是為了紀念中華民國的開國元勳、國父蔣中正而建立的。
+                    <br>蔣中正是中華民國的重要政治家和軍事將領，在二戰後領導台灣，推動現代化建設和民主改革。
+                    <br>中正紀念堂以其雄偉的建築和深遠的紀念意義，成為了對蔣中正和台灣歷史的重要紀念場所。
+                    <br>宏偉建築：
+                    <br>紀念堂的主體建築為一座白色大理石的大殿，四周由八根巨大的紅柱子支撐著，象徵著中華民國的八個省份。
+                    <br>整個建築呈現著嚴謹和尊嚴的氛圍，給人一種肅穆而莊嚴的感受。
+                    <br>中正紀念堂的建築風格受到中國傳統宮殿建築的影響，它的外觀氣勢磅礡，展現出壯麗的建築風格。
+                    <br>國家象徵：
+                    <br>中正紀念堂不僅僅是一座建築物，它也是台灣的國家象徵之一。
+                    <br>在這裡，人們可以看到蔣中正的銅像，他的形象以嚴肅堅毅的姿態展現，象徵著國家領導者的威嚴和力量。
+                    <br>每天升起和降下的國旗儀式更加強了紀念堂作為國家象徵的地位，吸引了大量遊客和民眾前來參觀和致敬。
+                    <br>文化活動：
+                    <br>除了作為紀念場所，中正紀念堂也經常舉辦各種文化活動和展覽。
+                    <br>在紀念堂內部，有一個文物展示區，展示著蔣中正的生平和事跡，讓遊客了解他對台灣和中國的貢獻。
+                    <br>此外，紀念堂的廣場也是舉辦音樂會、表演和傳統節日慶祝活動的場所，吸引了眾多文化藝術愛好者的參與。`
+            },
+            {
+                id: '2',
+                color: '#D7E3E3',
+                imgUrl: './long.png',
+                bless: '龍騰吊橋',
+                character:'高空吊橋、自然景觀、生態遊憩',
+                text: 
+                `高空吊橋：
+                    <br>龍騰吊橋是台灣最長的高空吊橋之一，全長約230公尺（755英尺），寬度寬敞，高懸於山谷之間。
+                    <br>走在吊橋上，你可以感受到腳下的虛空和高度的震撼，這種刺激和挑戰是吸引遊客們前來的主要原因之一。
+                    <br>自然景觀：
+                    <br>龍騰吊橋位於茂密的山林和河谷之間，周圍被綠意包圍，給人一種清新而寧靜的感覺。
+                    <br>在吊橋上，你可以俯瞰到壯觀的山脈和流水潺潺的溪流，以及原始森林和美麗的自然景觀。
+                    <br>這裡也是觀賞日出和日落的理想場所，讓你沉浸在大自然的美麗中。
+                    <br>生態遊憩：
+                    <br>龍騰吊橋所在的地區是一個豐富的生態區域，這裡擁有許多原生植物和野生動物。
+                    <br>在吊橋周圍，有許多自然步道和生態保護區，供遊客們進行生態探險和遠足活動。
+                    <br>你可以近距離觀察到台灣的特有種植物和鳥類，享受大自然的美妙之處。
+                    <br>休閒遊憩：
+                    <br>龍騰吊橋也提供了休閒和放鬆的環境，這裡有休息區和觀景平台，讓遊客們可以停下腳步，欣賞美景，並與家人和朋友共度愉快時光。
+                    <br>此外，周邊還有咖啡廳和小吃攤，供遊客品嚐當地美食和休閒享受。
+                    `
+            },
+            {
+                id: '3',
+                color: '#DED57E',
+                imgUrl: './kenting.png',
+                bless: '墾丁',
+                character: '美麗海灘、豐富自然景觀、水上活動、潛水勝地',
+                text: `美麗海灘：
+                    <br>墾丁擁有許多美麗的海灘，是海灣度假和水上活動的天堂。
+                    <br>其中，南灣海灘是最受歡迎的海灘之一，有細軟的白色沙灘和清澈的海水，是游泳、曬太陽和沙灘活動的理想場所。
+                    <br>其他著名的海灘還包括白沙灣、小灣、大灣等，每個海灘都有其獨特的風光和魅力。
+                    <br>豐富自然景觀：
+                    <br>你可以在這裡欣賞到壯觀的海蝕洞穴和海蝕柱，探索獨特的珊瑚礁生態，並沿著森林小徑遠足探險，享受大自然的美妙之處。
+                    <br>水上活動：
+                    <br>墾丁是水上活動的熱門地點，你可以在這裡體驗各種刺激的水上活動，如衝浪、浮潛、帆船、海上香蕉船等。
+                    <br>墾丁的海域富含豐富的海洋生物和珊瑚礁，使得浮潛和潛水也成為此地的一大亮點。
+                  `
+            },
+            {
+                id: '4',
+                color: '#ECB7B1',
+                imgUrl: './maok.png',
+                bless: '貓空',
+                character: '風景秀麗、茶文化、登山健行',
+                text: `風景秀麗：
+                    <br>貓空地區被群山環繞，擁有壯觀的自然風景。
+                    <br>當你登上貓空的山頂，可以俯瞰到美麗的山脈和山谷景色，令人心曠神怡。
+                    <br>特別是在晴朗的天氣裡，你可以遠眺台北市區和遠處的海洋，享受壯麗的全景。
+                    <br>這裡也是觀賞日出和日落的理想場所，讓你沉浸在大自然的美麗中。
+                    <br>茶文化：：
+                    <br>貓空以其茶文化而聞名，這裡有著悠久的茶葉種植和製作傳統。
+                    <br>許多茶園和茶葉工廠分佈在貓空地區，種植和製作出高品質的台灣茶葉。
+                    <br>你可以參觀茶園，了解茶葉的種植和加工過程，並品嚐到新鮮的茶葉。
+                    <br>登山健行：
+                    <br>貓空地區擁有許多登山步道，是健行和戶外活動的理想場所。
+                    <br>你可以選擇不同難度的登山路線，從輕鬆的步道到具有挑戰性的山徑，滿足各種登山者的需求。
+                    <br>沿著步道，你會經過茂密的森林、清澈的溪流和瀑布，享受大自然的寧靜和美景。
+                    `
+            },
+            {
+                id: '5',
+                color: '#D7E3E3',
+                imgUrl: './memorial.png',
+                bless: '國父紀念館',
+                character: `紀念碑式建築、國父紀念、文化活動場所`,
+                text: `紀念碑式建築：
+                    <br>國父紀念館是一座宏偉的紀念碑式建築，採用中國古典建築風格，富有禮儀和儀式感。
+                    <br>整個建築群包括主體建築和周圍的花園，營造出一種庄重肅穆的氛圍。
+                    <br>其中主體建築為圓頂式，象徵著圓滿和完美，內部設有孫中山先生的紀念堂，供人們緬懷他的貢獻。
+                    <br>國父紀念：
+                    <br>國父紀念館是為了紀念中華民國國父孫中山先生而興建的，他是中國近代史上的偉大政治家和革命家。
+                    <br>國父紀念館展示了孫中山先生的生平事跡和貢獻，通過展覽、文物和影像等方式向人們介紹他的思想和精神。
+                    <br>館內還有孫中山先生的塑像和紀念品，為遊客們提供了了解他的重要場所。
+                    <br>文化活動場所：
+                    <br>國父紀念館也是一個重要的文化活動場所。
+                    <br>這裡經常舉辦各種文化和藝術活動，包括音樂會、舞蹈表演、講座和展覽等。
+                    <br>特別是在重要節日和紀念日，國父紀念館成為慶祝和紀念活動的中心場所，吸引了大量的參觀者和參與者。
+                    <br>公共休閒場所：
+                    <br>國父紀念館周圍有寬闊的花園和廣場，為市民和遊客提供了一個公共休閒場所。
+                    <br>人們可以在這裡散步、運動、野餐，享受寧靜的環境和綠意盎然的景觀。
+                    <br>周末和假日時，國父紀念館常常成為人們聚集的地方，舉行各種休閒活動和社區聚會。`
+            },
+            {
+                id: '6',
+                color: '#ECB7B1',
+                imgUrl: './taipei.jpg',
+                bless: '台北101',
+                character: `超高摩天大樓、風景觀景台、商業購物中心`,
+                text: `超高摩天大樓：
+                    <br>台北101在2004年完工時，是全球最高的摩天大樓，高度達508米（1,667英尺），擁有101層樓，因此得名。
+                    <br>雖然在後來被其他大樓超越，但仍然是台灣最高的建築，並且在台北市天際線上矗立，成為城市的標誌性建築。
+                    <br>風景觀景台：
+                    <br>台北101的觀景台位於大樓的頂部，名為「風華觀景台」。
+                    <br>它提供絕佳的360度城市全景，包括台北市中心、山脈和海洋景色，是台北市最受歡迎的旅遊景點之一。
+                    <br>在晴朗的日子裡，遊客們可以俯瞰整個城市和遠處的美麗景色。
+                    <br>商業購物中心：
+                    <br>台北101是一個大型商業購物中心，擁有多個樓層，提供各種品牌的精品、時尚服飾、餐廳、咖啡館和娛樂設施。
+                    <br>這裡集結了世界知名品牌和本土特色店鋪，滿足了各種購物和消費需求，讓遊客們享受到高品質的購物體驗。
+                    <br>環保特點：
+                    <br>台北101設計時考慮了環保和永續發展的因素。
+                    <br>大樓採用了許多節能技術，包括太陽能電池板、雨水回收系統和高效能玻璃幕牆等。
+                    <br>它也是台灣第一座通過綠建築認證的建築，展示了對環境保護的承諾。
+                    `
+            },
+            {
+                id: '7',
+                color: '#B8CAC9',
+                imgUrl: './buhda.png',
+                bless: '佛光山',
+                character: '佛教寺廟、宏偉建築、修行氛圍',
+                text: `佛教寺廟：
+                    <br>佛光山是一個重要的佛教寺廟，屬於佛光山世界佛教總部，是台灣最大的佛教寺廟之一。
+                    <br>寺廟的建設始於1967年，經過多年的擴建和發展，成為了一個宏偉的佛教聖地。
+                    <br>這裡是信眾們修行和參拜的重要場所，也吸引了許多國內外遊客前來參觀和參禮。
+                    <br>宏偉建築：
+                    <br>佛光山寺廟的建築風格結合了中國古典建築和現代風格，寺廟的主要建築物以白色大理石為主，氣勢磅礡。
+                    <br>尤其是大雄寶殿，是佛光山最重要的建築之一，內供奉著三尊佛陀，菩薩和辟支佛，為信眾們修行和參拜的主要場所。
+                    <br>在寺廟的周圍，還有美麗的花園和涼亭，為信眾和遊客提供一個寧靜和舒適的環境。
+                    <br>修行氛圍：
+                    <br>佛光山寺廟散發著濃厚的修行氛圍，這裡的僧侶和信眾們每天都進行禪修和課誦，追求心靈的平靜和覺悟。
+                    <br>寺廟的周圍經常舉辦佛教法會和講座，讓信眾們學習佛法和深入了解佛教教義。
+                    <br>在這裡，你可以感受到慈悲和智慧的氛圍，讓人感受到內心的寧靜和滿足。
+                    <br>文化藝術：
+                    <br>佛光山不僅是一個佛教寺廟，也是一個豐富的文化藝術中心。
+                    <br>這裡經常舉辦藝術展覽、音樂會和佛教文化活動，豐富了信眾和遊客的精神生活。
+                    <br>寺廟內的藝術品和佛教文物也是參觀的重要亮點，讓人們了解佛教藝術和文化的深遠影響。`
+            },
+            {
+                id: '8',
+                color: '#EEECBB',
+                imgUrl: './kao.png',
+                bless: '蓮潭池',
+                character: '自然美景、神秘感、文化歷史',
+                text: 
+                `自然美景：
+                    <br>蓮潭池被茂密的樹林所環繞，湖泊平靜如鏡，呈現出迷人的水景景觀。
+                    <br>湖中散布著許多蓮花，特別是在夏季時，湖面上盛開著綻放的蓮花，給人一種優雅和寧靜的感覺。
+                    <br>這裡的自然環境相當清幽，適合散步和放鬆心情。
+                    <br>神秘感：
+                    <br>蓮潭池散發著一種神秘的氛圍，這源於池塘的傳說和歷史背景。
+                    <br>人們相傳，曾經有一位魔術師在這個地方居住，他以其才華和神秘的個性為這個地方增添了神秘感。
+                    <br>這段傳說賦予了蓮潭池獨特的魅力，吸引著遊客們來探索這個神秘的地方。
+                    <br>文化歷史：
+                    <br>蓮潭池擁有豐富的文化歷史背景。
+                    <br>在古代，這個地方是一個重要的水源地，供應當地居民的用水需求。
+                    <br>同時，它也是一個重要的休憩場所，人們在這裡遊玩、賞景和聚會。
+                    <br>這個地方曾經承載著當地人民的生活和活動，代表著他們的歷史和文化傳統。
+                    <br>旅遊活動：
+                    <br>蓮潭池成為了一個受到遊客喜愛的旅遊目的地。
+                    <br>遊客們可以在這裡漫步於湖畔，欣賞湖面上綻放的蓮花和周圍的自然景觀。
+                    <br>此外，還可以租借船隻，在湖上划船，享受寧靜和放鬆的時刻。
+                    <br>蓮潭池附近還有一些咖啡廳和小吃攤，供應當地美食和飲品，讓遊客在享受自然之餘也能品味當地的美食文化。`
+            },
+            {
+                id: '9',
+                color: '#EFE1C7',
+                imgUrl: './ximen.png',
+                bless: '西門',
+                character: `古城門遺跡、時尚潮流、夜市美食`,
+                text: `古城門遺跡：
+                    <br>西門是台北市保存最完整的古城門遺跡之一，也是台北的象徵之一。
+                    <br>西門城樓建於清朝時期，是城牆的一部分，守護著城市的入口。
+                    <br>雖然現在城門已不再是城牆的一部分，但它的建築風格和歷史價值仍然吸引著遊客們前來參觀和拍照。
+                    <br>西門也成為了一個受歡迎的拍照打卡景點。
+                    <br>時尚潮流：
+                    <br>西門是台北市的時尚潮流區之一，擁有許多時尚的街頭藝術和年輕人喜愛的潮流商店。
+                    <br>在這裡，你可以找到各種特色的小店、設計師品牌和獨立藝術空間。
+                    <br>西門的年輕氛圍吸引著許多年輕人和時尚愛好者，是尋找獨特商品和文化創意的好去處。
+                    <br>夜市美食：
+                    <br>西門是台北市著名的夜市區之一，這裡擁有各種美味的夜市小吃和台灣特色料理。
+                    <br>你可以品嚐到臭豆腐、大腸包小腸、蚵仔煎、珍珠奶茶等台灣著名的美食。
+                    <br>夜市的街頭攤位總是熙來攘往，充滿了熱鬧和美食的香氣，是一個享受台灣夜市文化的好地方。
+                    `
+            },
+            {
+                id: '10',
+                color: '#EEECBB',
+                imgUrl: './yelui.png',
+                bless: '野柳',
+                character: `奇岩異石、海蝕地形、自然景觀`,
+                text: `奇岩異石：
+                    <br>野柳地區以其奇特的岩石地形而聞名，這些岩石形成了各種獨特的形狀和造型。
+                    <br>最著名的是「女王頭」，它是一個巨大的岩石，形狀像一個戴著皇冠的女人頭部。
+                    <br>還有其他形狀各異的奇岩，如「石滬」、「燭台石」等，這些岩石散發出古老而神秘的氛圍，吸引了大量遊客前來觀賞和拍照。
+                    <br>海蝕地形：
+                    <br>野柳地區的海岸線受到長期的海浪沖擊，形成了壯觀的海蝕地形。
+                    <br>你可以看到懸崖峭壁、海蝕洞穴和奇特的海蝕石柱，這些地形讓人驚嘆大自然的力量和創造力。
+                    <br>當海浪衝擊岸邊時，會形成壯觀的噴水柱，給人一種震撼的感覺。
+                    <br>尤其是在日落時分，夕陽的餘暉映照在海蝕地形上，營造出美麗的景色。
+                    <br>自然景觀：
+                    <br>除了奇岩異石和海蝕地形，野柳還擁有迷人的自然景觀。
+                    <br>這裡有茂密的樹林和綠意盎然的草地，給人一種寧靜和舒適的感覺。
+                    <br>此外，野柳也是一個觀鳥的好地方，吸引了許多鳥類棲息和遷徙，讓鳥類愛好者們享受觀鳥的樂趣。`
+            }
+        ]
+
+        let bricks = document.querySelectorAll('[box-id]');
+        bricks = [...bricks].sort((a, b) => { return a.getAttribute('box-id') - b.getAttribute('box-id') })
+        console.log(bricks);
+        //渲染畫面
+        bricks.forEach((item, idx) => {
+            let id = (idx + 1) % 10 != 0 ? (idx + 1) % 10 : 10;
+            let obj = figureData.find(x => x.id == id);
+
+            let img = document.createElement('img');
+            img.src = `${obj.imgUrl}`;
+            item.style.backgroundColor = `${obj.color}`;
+            img.classList.add('w-100');
+            item.classList.add('bg-Lyellow');
+            item.append(img);
+        })
+
+        let steps = 0; //剩餘步數
+        let allSteps = 0; //全部步數
+        let currentIndex = 0; //目前走到哪一格
+
+        let speed; //速率
+
+        document.getElementById('startBtn').addEventListener("click", () => {
+            speed = 50;
+
+            let random = Math.floor(Math.random() * bricks.length) + 1;
+            allSteps = random + (bricks.length * 3);
+            steps = allSteps;
+            turnAround();
+        })
+
+        function turnAround() {
+            bricks[currentIndex].classList.add('bg-Lyellow');
+            currentIndex++;
+
+            if (currentIndex >= bricks.length) {
+                currentIndex = 0;
+            }
+
+            bricks[currentIndex].classList.remove('bg-Lyellow');
+            steps--;
+            console.log(steps);
+            if (steps > 0) {
+                setTimeout(turnAround, speed);
+
+                if (steps < (allSteps / 7)) {
+                    speed += 7;
+                }
+            } else {
+                console.log(bricks[currentIndex]);
+                let num = bricks[currentIndex].getAttribute('box-id');
+                let id = num % 10 != 0 ? num % 10 : 10;
+                let obj = figureData.find(x => x.id == id);
+                console.log(obj)
+
+                let modal = document.getElementById('figureModal');
+                let modalbg = modal.querySelector('.modal-content');
+                modalbg.style.backgroundColor = `${obj.color}`;
+
+                let img = modal.querySelector('img');
+                img.src = `${obj.imgUrl}`;
+                let h5 = modal.querySelector('h5');
+                h5.innerHTML = `${obj.bless}`;
+
+                let character = document.getElementById('character');
+                character.innerHTML = `${obj.character}`;
+                let text = document.getElementById('character-text');
+                text.innerHTML = `${obj.text}`;
+                myModal.show();
+            }
+        }
+
+        
+    </script>
+</body>
+
+</html>
