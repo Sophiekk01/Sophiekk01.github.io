@@ -5,48 +5,105 @@
 </head>
 <style>
     
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f9f9f9;
-            text-align: center;
-            padding: 20px;
-        }
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #fdd2e1;
+        text-align: center;
+        padding: 20px;
+    }
 
-        h1 {
-            color: #ff6b6b;
-        }
+    h1 {
+        color: #ff6b6b;
+        font-family: 'Tahoma', sans-serif;
+        font-size: 36px;
+    }
 
-        #todoInput {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
+    #todoInput {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
 
-        button {
-            padding: 10px;
-            font-size: 16px;
-            background-color: #ff6b6b;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px; /* 新增這行來增加左邊距離 */
-        }
+    button {
+        padding: 10px;
+        font-size: 16px;
+        background-color: #ff6b6b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 20px;
-        }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 20px;
+    }
 
-        li {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 10px;
-        }
-    
+    li {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .spancontent {
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    .checkbox-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .checkbox-custom {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-color: #ff6b6b;
+        border-radius: 50%;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .checkbox-custom input[type="checkbox"] {
+        display: none;
+    }
+
+    .checkbox-custom input[type="checkbox"]:checked ~ .checkmark {
+        background-color: #fff;
+    }
+
+    .checkmark {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: #ff6b6b;
+        border-radius: 50%;
+        margin-left: 4px;
+    }
+
+    .buttons {
+        display: flex;
+    }
+
+    .edit-button {
+        background-color: #ffadad;
+        margin-right: 5px;
+    }
+
+    .delete-button {
+        background-color: #ffc6c6;
+    }
+
 </style>
 <body>
     <h1>Todo List</h1>
@@ -57,59 +114,74 @@
         // 從localStorage中讀取待辦清單，如果沒有就初始化為一個空陣列
         let todoList = JSON.parse(localStorage.getItem('todoList')) || [];
 
+        //如果有重複的字串todoList,就要開始思考重構
+        //修改時易有遺漏
+       
         // 重新渲染待辦清單
-        function renderTodoList() {
-            const todoListElement = document.getElementById('todoList');
-            todoListElement.innerHTML = '';
+            function renderTodoList() {
+                const todoListElement = document.getElementById('todoList');
+                todoListElement.innerHTML = '';
 
-            todoList.forEach((todo, index) => {
-                const todoItem = document.createElement('li');
+                todoList.forEach((todo, index) => {
+                    const todoItem = document.createElement('li');
 
-                // 待辦事項內容
-                const todoContent = document.createElement('span');
-                todoContent.innerText = todo.content;
+                    // 待辦事項內容
+                    const todoContent = document.createElement('span');
+                    todoContent.classList.add("spancontent")
+                    todoContent.innerText = todo.content;
 
-                // 刪除按鈕
-                const deleteButton = document.createElement('button');
-                deleteButton.innerText = '刪除';
-                deleteButton.addEventListener('click', () => {
-                    deleteTodoItem(index);
+                    // 刪除按鈕
+                    const deleteButton = document.createElement('button');
+                    deleteButton.innerText = '刪除';
+                    deleteButton.addEventListener('click', () => {
+                        deleteTodoItem(index);
+                    });
+
+                    // 編輯按鈕
+                    const editButton = document.createElement('button');
+                    editButton.innerText = '編輯';
+                    editButton.addEventListener('click', () => {
+                        editTodoItem(index);
+                    });
+
+                    // 完成狀態checkbox
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.checked = todo.completed;
+                    checkbox.addEventListener('change', () => {
+                        toggleCompleted(index);
+                    });
+
+                    todoItem.appendChild(checkbox);
+                    todoItem.appendChild(todoContent);
+                    todoItem.appendChild(editButton);
+                    todoItem.appendChild(deleteButton);
+                    todoListElement.appendChild(todoItem);
                 });
-
-                // 編輯按鈕
-                const editButton = document.createElement('button');
-                editButton.innerText = '編輯';
-                editButton.addEventListener('click', () => {
-                    editTodoItem(index);
-                });
-
-                // 完成狀態checkbox
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.checked = todo.completed;
-                checkbox.addEventListener('change', () => {
-                    toggleCompleted(index);
-                });
-
-                todoItem.appendChild(checkbox);
-                todoItem.appendChild(todoContent);
-                todoItem.appendChild(editButton);
-                todoItem.appendChild(deleteButton);
-                todoListElement.appendChild(todoItem);
-            });
-        }
+            }
+        
 
         // 新增待辦事項
         function addTodo() {
             const todoInput = document.getElementById('todoInput');
             const content = todoInput.value.trim();
-            if (content) {
-                const newTodo = { content, completed: false };
-                todoList.push(newTodo);
-                saveTodoList();
-                renderTodoList();
-                todoInput.value = '';
+            // if (content) {
+            //     const newTodo = { content, completed: false };
+            //     todoList.push(newTodo);
+            //     saveTodoList();
+            //     renderTodoList();
+            //     todoInput.value = '';
+            // }
+            if (content === '') {
+                alert('請輸入代辦事項');
+                return; // 不執行新增操作
             }
+
+            const newTodo = { content, completed: false };
+            todoList.push(newTodo);
+            saveTodoList();
+            renderTodoList();
+            todoInput.value = '';
         }
 
         // 刪除待辦事項
@@ -140,9 +212,17 @@
         function saveTodoList() {
             localStorage.setItem('todoList', JSON.stringify(todoList));
         }
+        //寫一半
+        // function saveTodoList() {
+        //     localStorage.getItem('todoList', JSON.stringify(todoList));
+        // }
 
         // 初始化
-        renderTodoList();
+       
+        window.onload = function() {
+            renderTodoList();
+        };
+       
     </script>
 </body>
 </html>
